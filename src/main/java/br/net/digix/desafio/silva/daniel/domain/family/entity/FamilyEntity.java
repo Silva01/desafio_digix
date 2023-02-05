@@ -1,7 +1,10 @@
 package br.net.digix.desafio.silva.daniel.domain.family.entity;
 
+import br.net.digix.desafio.silva.daniel.domain.family.exception.CpfJaCadastradoException;
+import br.net.digix.desafio.silva.daniel.domain.family.exception.FamilyConjugeNotValidException;
 import br.net.digix.desafio.silva.daniel.domain.family.value_object.Dependent;
 import br.net.digix.desafio.silva.daniel.domain.family.value_object.FamilyDTO;
+import br.net.digix.desafio.silva.daniel.domain.family.value_object.enuns.DependentTypeEnum;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -18,6 +21,7 @@ public class FamilyEntity {
         this.name = name;
         this.dependents = dependents;
         this.cpf = cpf;
+        this.validate();
     }
 
     public String getName() {
@@ -55,7 +59,15 @@ public class FamilyEntity {
 
     public void validate() {
         if (this.cpf == null) {
-            throw new IllegalArgumentException("CPF is required");
+            throw new CpfJaCadastradoException();
+        }
+
+        if (this.dependents.stream().filter(d -> d.getType().equals(DependentTypeEnum.CONJUGE)).count() > 1) {
+            throw new FamilyConjugeNotValidException("Familia com mais de um conjuge");
+        }
+
+        if (this.dependents.stream().filter(d -> d.getType().equals(DependentTypeEnum.CONJUGE)).count() == 0) {
+            throw new FamilyConjugeNotValidException("Familia sem conjuge");
         }
     }
 }
