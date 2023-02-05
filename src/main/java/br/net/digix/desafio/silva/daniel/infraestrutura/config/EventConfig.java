@@ -27,7 +27,7 @@ public class EventConfig {
         this.criteriaRepository = criteriaRepository;
     }
 
-    @Bean("familyEventDispatcher")
+    @Bean(name = "familyEventDispatcher")
     public EventDispatcherInterface eventDispatcher() {
         EventDispatcher eventDispatcher = new EventDispatcher();
         EventHandlerInterface<EventInterface> handler = FamilyEventFactory.createCalculatePointsHandler(criteriaRepository);
