@@ -80,7 +80,7 @@ class CalculateDependentEventTest {
                 2
         );
 
-        when(criteriaRepository.findAll()).thenReturn(List.of(criteriaIncomeTest, criteriaDependentTest, criteriaDependentTest2, criteriaIncomeTest2));
+        when(criteriaRepository.findAllByIsActiveTrue()).thenReturn(List.of(criteriaIncomeTest, criteriaDependentTest, criteriaDependentTest2, criteriaIncomeTest2));
     }
 
     @Test
