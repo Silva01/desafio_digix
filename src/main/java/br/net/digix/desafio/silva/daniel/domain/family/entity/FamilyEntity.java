@@ -67,7 +67,7 @@ public class FamilyEntity {
             throw new FamilyConjugeNotValidException("Familia com mais de um conjuge");
         }
 
-        if (this.dependents.stream().filter(d -> d.getType().equals(DependentTypeEnum.CONJUGE)).count() == 0) {
+        if (this.dependents.stream().noneMatch(d -> d.getType().equals(DependentTypeEnum.CONJUGE))) {
             throw new FamilyConjugeNotValidException("Familia sem conjuge");
         }
     }
