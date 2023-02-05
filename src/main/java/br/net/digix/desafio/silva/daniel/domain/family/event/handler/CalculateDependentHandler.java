@@ -24,7 +24,7 @@ public class CalculateDependentHandler implements EventHandlerInterface<EventInt
 
     @Override
     public void handle(EventInterface event) {
-        List<Criteria> criterias = this.criteriaRepository.findAll();
+        List<Criteria> criterias = this.criteriaRepository.findAllByIsActiveTrue();
         FamilyEntity familyEntity = (FamilyEntity) event.payload();
 
         calculateIncomeFamilyService.exec(criterias, familyEntity);
