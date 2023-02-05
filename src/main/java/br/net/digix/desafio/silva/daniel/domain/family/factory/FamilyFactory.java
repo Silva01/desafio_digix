@@ -6,6 +6,6 @@ import br.net.digix.desafio.silva.daniel.domain.family.value_object.FamilyDTO;
 public class FamilyFactory {
 
     public static FamilyEntity createFamilyEntity(final FamilyDTO familyDTO) {
-        return new FamilyEntity(familyDTO.getIncome(), familyDTO.getName(), familyDTO.getDependents());
+        return new FamilyEntity(familyDTO.getCpf(), familyDTO.getIncome(), familyDTO.getName(), familyDTO.getDependents());
     }
 }

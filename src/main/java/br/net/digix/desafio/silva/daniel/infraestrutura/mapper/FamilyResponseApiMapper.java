@@ -22,7 +22,7 @@ public class FamilyResponseApiMapper implements Function<FamilyModel, FamilyEnti
                         DependentGenderEnum.ofGender(dependentModel.getGender())))
                 .collect(Collectors.toList());
 
-        FamilyEntity family = new FamilyEntity(familiyModel.getIncome(), familiyModel.getName(), dependents);
+        FamilyEntity family = new FamilyEntity(familiyModel.getCpf(), familiyModel.getIncome(), familiyModel.getName(), dependents);
         family.addPoints(familiyModel.getPoints());
 
         return family;

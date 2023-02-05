@@ -2,10 +2,12 @@ package br.net.digix.desafio.silva.daniel.infraestrutura.service;
 
 import br.net.digix.desafio.silva.daniel.domain.family.entity.FamilyEntity;
 import br.net.digix.desafio.silva.daniel.domain.family.repository.FamilyRepository;
+import br.net.digix.desafio.silva.daniel.infraestrutura.exception.CpfJaCadastradoException;
 import br.net.digix.desafio.silva.daniel.infraestrutura.mapper.DependentToModelMapper;
 import br.net.digix.desafio.silva.daniel.infraestrutura.mapper.FamilyResponseApiMapper;
 import br.net.digix.desafio.silva.daniel.infraestrutura.model.FamilyModel;
 import br.net.digix.desafio.silva.daniel.infraestrutura.repository.FamiliyModelRepository;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +34,12 @@ public class FamilyService implements FamilyRepository {
         model.setIncome(family.getIncome());
         model.setPoints(family.getPoints());
         model.setDependents(family.getDependents().stream().map(dependentMapper).collect(Collectors.toList()));
-        repository.save(model);
+        model.setCpf(family.getCpf());
+        try {
+            repository.save(model);
+        } catch (DataIntegrityViolationException e) {
+            throw new CpfJaCadastradoException();
+        }
     }
 
     @Override
