@@ -20,6 +20,7 @@ import static org.mockito.Mockito.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -79,7 +80,7 @@ class CalculateDependentEventTest {
                 2
         );
 
-        when(criteriaRepository.findAll()).thenReturn(List.of(criteriaIncomeTest, criteriaDependentTest, criteriaDependentTest2));
+        when(criteriaRepository.findAll()).thenReturn(List.of(criteriaIncomeTest, criteriaDependentTest, criteriaDependentTest2, criteriaIncomeTest2));
     }
 
     @Test
@@ -87,7 +88,7 @@ class CalculateDependentEventTest {
 
         Dependent dependent = new Dependent(
                 "Teste",
-                LocalDate.of(2021, 11, 11),
+                LocalDate.now().minusYears(4),
                 false,
                 DependentTypeEnum.FILHO,
                 DependentGenderEnum.MASCULINO
@@ -110,6 +111,177 @@ class CalculateDependentEventTest {
         eventDispatcher.notify(event, eventHandler.getClass().getName());
 
         assertEquals(7, family.getPoints());
+    }
+
+    @Test
+    void shouldCalculateDontDependentEvent() {
+
+        FamilyEntity family = new FamilyEntity(
+                new BigDecimal(800),
+                "Daniel",
+                Collections.emptyList()
+        );
+
+        EventHandlerInterface<EventInterface> eventHandler = new CalculateDependentHandler(
+                criteriaRepository,
+                calculateIncomeFamilyService,
+                calculateDependentFamilyService
+        );
+
+        EventInterface event = new CalculateDependentEvent(family);
+
+        eventDispatcher.register(eventHandler, eventHandler.getClass().getName());
+        eventDispatcher.notify(event, eventHandler.getClass().getName());
+
+        assertEquals(5, family.getPoints());
+    }
+
+    @Test
+    void shouldCalculateDependentAndNotIncomesValidEvent() {
+
+        Dependent dependent = new Dependent(
+                "Teste",
+                LocalDate.now().minusYears(4),
+                false,
+                DependentTypeEnum.FILHO,
+                DependentGenderEnum.MASCULINO
+        );
+
+        FamilyEntity family = new FamilyEntity(
+                new BigDecimal(3000),
+                "Daniel",
+                List.of(dependent)
+        );
+
+        EventHandlerInterface<EventInterface> eventHandler = new CalculateDependentHandler(
+                criteriaRepository,
+                calculateIncomeFamilyService,
+                calculateDependentFamilyService
+        );
+
+        EventInterface event = new CalculateDependentEvent(family);
+
+        eventDispatcher.register(eventHandler, eventHandler.getClass().getName());
+        eventDispatcher.notify(event, eventHandler.getClass().getName());
+
+        assertEquals(2, family.getPoints());
+    }
+
+    @Test
+    void shouldCalculate3DependentOrMayorEvent() {
+
+        Dependent dependent = new Dependent(
+                "Teste",
+                LocalDate.now().minusYears(4),
+                false,
+                DependentTypeEnum.FILHO,
+                DependentGenderEnum.MASCULINO
+        );
+
+        Dependent dependent2 = new Dependent(
+                "Teste",
+                LocalDate.now().minusYears(5),
+                false,
+                DependentTypeEnum.FILHO,
+                DependentGenderEnum.MASCULINO
+        );
+
+        Dependent dependent3 = new Dependent(
+                "Teste",
+                LocalDate.now().minusYears(6),
+                false,
+                DependentTypeEnum.FILHO,
+                DependentGenderEnum.MASCULINO
+        );
+
+        FamilyEntity family = new FamilyEntity(
+                new BigDecimal(3000),
+                "Daniel",
+                List.of(dependent, dependent2, dependent3)
+        );
+
+        EventHandlerInterface<EventInterface> eventHandler = new CalculateDependentHandler(
+                criteriaRepository,
+                calculateIncomeFamilyService,
+                calculateDependentFamilyService
+        );
+
+        EventInterface event = new CalculateDependentEvent(family);
+
+        eventDispatcher.register(eventHandler, eventHandler.getClass().getName());
+        eventDispatcher.notify(event, eventHandler.getClass().getName());
+
+        assertEquals(3, family.getPoints());
+    }
+
+    @Test
+    void shouldCalculate3DependentOrMayorAndIncomeBetween901And1500Event() {
+
+        Dependent dependent = new Dependent(
+                "Teste",
+                LocalDate.now().minusYears(4),
+                false,
+                DependentTypeEnum.FILHO,
+                DependentGenderEnum.MASCULINO
+        );
+
+        Dependent dependent2 = new Dependent(
+                "Teste",
+                LocalDate.now().minusYears(5),
+                false,
+                DependentTypeEnum.FILHO,
+                DependentGenderEnum.MASCULINO
+        );
+
+        Dependent dependent3 = new Dependent(
+                "Teste",
+                LocalDate.now().minusYears(6),
+                false,
+                DependentTypeEnum.FILHO,
+                DependentGenderEnum.MASCULINO
+        );
+
+        FamilyEntity family = new FamilyEntity(
+                new BigDecimal(1000),
+                "Daniel",
+                List.of(dependent, dependent2, dependent3)
+        );
+
+        EventHandlerInterface<EventInterface> eventHandler = new CalculateDependentHandler(
+                criteriaRepository,
+                calculateIncomeFamilyService,
+                calculateDependentFamilyService
+        );
+
+        EventInterface event = new CalculateDependentEvent(family);
+
+        eventDispatcher.register(eventHandler, eventHandler.getClass().getName());
+        eventDispatcher.notify(event, eventHandler.getClass().getName());
+
+        assertEquals(6, family.getPoints());
+    }
+
+    @Test
+    void shouldCalculateIncomeBetween901And1500Event() {
+
+        FamilyEntity family = new FamilyEntity(
+                new BigDecimal(1000),
+                "Daniel",
+                Collections.emptyList()
+        );
+
+        EventHandlerInterface<EventInterface> eventHandler = new CalculateDependentHandler(
+                criteriaRepository,
+                calculateIncomeFamilyService,
+                calculateDependentFamilyService
+        );
+
+        EventInterface event = new CalculateDependentEvent(family);
+
+        eventDispatcher.register(eventHandler, eventHandler.getClass().getName());
+        eventDispatcher.notify(event, eventHandler.getClass().getName());
+
+        assertEquals(3, family.getPoints());
     }
 
 }
