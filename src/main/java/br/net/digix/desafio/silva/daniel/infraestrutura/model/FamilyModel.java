@@ -11,7 +11,7 @@ public class FamilyModel {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "cpf", unique = true)
     private String cpf;
@@ -25,14 +25,15 @@ public class FamilyModel {
     @Column(name = "points")
     private int points;
 
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "dependent_id")
     private List<DependentModel> dependents;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
