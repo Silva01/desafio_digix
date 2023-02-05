@@ -10,13 +10,13 @@ import br.net.digix.desafio.silva.daniel.domain.shared.interfaces.EventInterface
 
 import java.util.List;
 
-public class CalculateDependentHandler implements EventHandlerInterface<EventInterface> {
+public class CalculatePointsFamilyHandler implements EventHandlerInterface<EventInterface> {
 
     private final CriteriaRepository criteriaRepository;
     private final CalculateIncomeFamilyService calculateIncomeFamilyService;
     private final CalculateDependentFamilyService calculateDependentFamilyService;
 
-    public CalculateDependentHandler(CriteriaRepository criteriaRepository, CalculateIncomeFamilyService calculateIncomeFamilyService, CalculateDependentFamilyService calculateDependentFamilyService) {
+    public CalculatePointsFamilyHandler(CriteriaRepository criteriaRepository, CalculateIncomeFamilyService calculateIncomeFamilyService, CalculateDependentFamilyService calculateDependentFamilyService) {
         this.criteriaRepository = criteriaRepository;
         this.calculateIncomeFamilyService = calculateIncomeFamilyService;
         this.calculateDependentFamilyService = calculateDependentFamilyService;
