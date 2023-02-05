@@ -1,9 +1,8 @@
 package br.net.digix.desafio.silva.daniel.domain.family.event.handler;
 
 import br.net.digix.desafio.silva.daniel.domain.family.entity.FamilyEntity;
+import br.net.digix.desafio.silva.daniel.domain.family.interfaces.Calculate;
 import br.net.digix.desafio.silva.daniel.domain.family.repository.CriteriaRepository;
-import br.net.digix.desafio.silva.daniel.domain.family.service.CalculateDependentFamilyService;
-import br.net.digix.desafio.silva.daniel.domain.family.service.CalculateIncomeFamilyService;
 import br.net.digix.desafio.silva.daniel.domain.family.value_object.Criteria;
 import br.net.digix.desafio.silva.daniel.domain.shared.interfaces.EventHandlerInterface;
 import br.net.digix.desafio.silva.daniel.domain.shared.interfaces.EventInterface;
@@ -13,21 +12,19 @@ import java.util.List;
 public class CalculatePointsFamilyHandler implements EventHandlerInterface<EventInterface> {
 
     private final CriteriaRepository criteriaRepository;
-    private final CalculateIncomeFamilyService calculateIncomeFamilyService;
-    private final CalculateDependentFamilyService calculateDependentFamilyService;
+    private final List<Calculate<List<Criteria>, FamilyEntity>> calculateList;
 
-    public CalculatePointsFamilyHandler(CriteriaRepository criteriaRepository, CalculateIncomeFamilyService calculateIncomeFamilyService, CalculateDependentFamilyService calculateDependentFamilyService) {
+    public CalculatePointsFamilyHandler(
+            final CriteriaRepository criteriaRepository,
+            final List<Calculate<List<Criteria>, FamilyEntity>> calculateList) {
         this.criteriaRepository = criteriaRepository;
-        this.calculateIncomeFamilyService = calculateIncomeFamilyService;
-        this.calculateDependentFamilyService = calculateDependentFamilyService;
+        this.calculateList = calculateList;
     }
 
     @Override
     public void handle(EventInterface event) {
         List<Criteria> criterias = this.criteriaRepository.findAllByIsActiveTrue();
         FamilyEntity familyEntity = (FamilyEntity) event.payload();
-
-        calculateIncomeFamilyService.exec(criterias, familyEntity);
-        calculateDependentFamilyService.exec(criterias, familyEntity);
+        calculateList.forEach(calculate -> calculate.exec(criterias, familyEntity));
     }
 }

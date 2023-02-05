@@ -2,6 +2,7 @@ package br.net.digix.desafio.silva.daniel.domain.family.event;
 
 import br.net.digix.desafio.silva.daniel.domain.family.entity.FamilyEntity;
 import br.net.digix.desafio.silva.daniel.domain.family.event.handler.CalculatePointsFamilyHandler;
+import br.net.digix.desafio.silva.daniel.domain.family.interfaces.Calculate;
 import br.net.digix.desafio.silva.daniel.domain.family.repository.CriteriaRepository;
 import br.net.digix.desafio.silva.daniel.domain.family.service.CalculateDependentFamilyService;
 import br.net.digix.desafio.silva.daniel.domain.family.service.CalculateIncomeFamilyService;
@@ -31,6 +32,8 @@ class CalculateDependentEventTest {
     private EventDispatcher eventDispatcher = new EventDispatcher();
     private CalculateDependentFamilyService calculateDependentFamilyService = new CalculateDependentFamilyService();
     private CalculateIncomeFamilyService calculateIncomeFamilyService = new CalculateIncomeFamilyService();
+
+    private final List<Calculate<List<Criteria>, FamilyEntity>> calculateList = List.of(calculateIncomeFamilyService, calculateDependentFamilyService);
 
     private CriteriaRepository criteriaRepository = mock(CriteriaRepository.class);
 
@@ -101,8 +104,7 @@ class CalculateDependentEventTest {
 
         EventHandlerInterface<EventInterface> eventHandler = new CalculatePointsFamilyHandler(
                 criteriaRepository,
-                calculateIncomeFamilyService,
-                calculateDependentFamilyService
+                calculateList
         );
 
         EventInterface event = new CalculateDependentEvent(family);
@@ -124,8 +126,7 @@ class CalculateDependentEventTest {
 
         EventHandlerInterface<EventInterface> eventHandler = new CalculatePointsFamilyHandler(
                 criteriaRepository,
-                calculateIncomeFamilyService,
-                calculateDependentFamilyService
+                calculateList
         );
 
         EventInterface event = new CalculateDependentEvent(family);
@@ -155,8 +156,7 @@ class CalculateDependentEventTest {
 
         EventHandlerInterface<EventInterface> eventHandler = new CalculatePointsFamilyHandler(
                 criteriaRepository,
-                calculateIncomeFamilyService,
-                calculateDependentFamilyService
+                calculateList
         );
 
         EventInterface event = new CalculateDependentEvent(family);
@@ -202,8 +202,7 @@ class CalculateDependentEventTest {
 
         EventHandlerInterface<EventInterface> eventHandler = new CalculatePointsFamilyHandler(
                 criteriaRepository,
-                calculateIncomeFamilyService,
-                calculateDependentFamilyService
+                calculateList
         );
 
         EventInterface event = new CalculateDependentEvent(family);
@@ -249,8 +248,7 @@ class CalculateDependentEventTest {
 
         EventHandlerInterface<EventInterface> eventHandler = new CalculatePointsFamilyHandler(
                 criteriaRepository,
-                calculateIncomeFamilyService,
-                calculateDependentFamilyService
+                calculateList
         );
 
         EventInterface event = new CalculateDependentEvent(family);
@@ -272,8 +270,7 @@ class CalculateDependentEventTest {
 
         EventHandlerInterface<EventInterface> eventHandler = new CalculatePointsFamilyHandler(
                 criteriaRepository,
-                calculateIncomeFamilyService,
-                calculateDependentFamilyService
+                calculateList
         );
 
         EventInterface event = new CalculateDependentEvent(family);
