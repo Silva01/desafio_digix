@@ -7,21 +7,17 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class FamilyEntity {
-    private String id;
+    private String cpf;
     private String name;
     private BigDecimal income;
     private List<Dependent> dependents;
     private int points;
 
-    public FamilyEntity(BigDecimal income, String name, List<Dependent> dependents) {
-        this.id = "123";
+    public FamilyEntity(String cpf, BigDecimal income, String name, List<Dependent> dependents) {
         this.income = income;
         this.name = name;
         this.dependents = dependents;
-    }
-
-    public String getId() {
-        return id;
+        this.cpf = cpf;
     }
 
     public String getName() {
@@ -34,6 +30,10 @@ public class FamilyEntity {
 
     public List<Dependent> getDependents() {
         return dependents;
+    }
+
+    public String getCpf() {
+        return cpf;
     }
 
     public void addPoints(int points) {
@@ -49,6 +49,7 @@ public class FamilyEntity {
         dto.setIncome(this.income);
         dto.setDependents(this.dependents);
         dto.setPoints(this.points);
+        dto.setCpf(this.cpf);
         return dto;
     }
 }

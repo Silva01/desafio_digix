@@ -5,6 +5,7 @@ import java.util.List;
 
 public class FamilyDTO {
     private String name;
+    private String cpf;
     private BigDecimal income;
     private List<Dependent> dependents;
 
@@ -40,5 +41,13 @@ public class FamilyDTO {
 
     public void setPoints(long points) {
         this.points = points;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 }

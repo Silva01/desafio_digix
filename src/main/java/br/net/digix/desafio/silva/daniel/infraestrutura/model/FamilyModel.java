@@ -13,6 +13,9 @@ public class FamilyModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name = "cpf", unique = true)
+    private String cpf;
+
     @Column(name = "name")
     private String name;
 
@@ -63,5 +66,13 @@ public class FamilyModel {
 
     public void setDependents(List<DependentModel> dependents) {
         this.dependents = dependents;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 }
