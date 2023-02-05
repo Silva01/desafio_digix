@@ -38,7 +38,7 @@ public class FamilyController {
         this.familyRepository = familyRepository;
     }
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public void createFamily(@RequestBody FamilyDTO familyDTO) {
         EventInterface event = FamilyEventFactory.createEventFamily(FamilyFactory.createFamilyEntity(familyDTO));
