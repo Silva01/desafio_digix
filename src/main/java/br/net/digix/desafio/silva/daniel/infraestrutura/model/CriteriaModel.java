@@ -3,7 +3,7 @@ package br.net.digix.desafio.silva.daniel.infraestrutura.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "criteria")
+@Table(name = "CRITERIA")
 public class CriteriaModel {
 
     @Id
@@ -21,7 +21,7 @@ public class CriteriaModel {
     private Integer finalCriteria;
 
     @Column(name = "is_actived")
-    private boolean isActived;
+    private boolean actived;
 
     @Column(name = "description")
     private String description;
@@ -68,11 +68,11 @@ public class CriteriaModel {
     }
 
     public boolean isActived() {
-        return isActived;
+        return actived;
     }
 
     public void setActived(boolean actived) {
-        isActived = actived;
+        actived = actived;
     }
 
     public String getDescription() {
