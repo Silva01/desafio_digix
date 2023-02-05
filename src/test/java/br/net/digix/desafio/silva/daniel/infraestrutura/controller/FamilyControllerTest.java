@@ -1,6 +1,9 @@
 package br.net.digix.desafio.silva.daniel.infraestrutura.controller;
 
 import br.net.digix.desafio.silva.daniel.domain.family.entity.FamilyEntity;
+import br.net.digix.desafio.silva.daniel.domain.family.value_object.Dependent;
+import br.net.digix.desafio.silva.daniel.domain.family.value_object.enuns.DependentGenderEnum;
+import br.net.digix.desafio.silva.daniel.domain.family.value_object.enuns.DependentTypeEnum;
 import br.net.digix.desafio.silva.daniel.domain.shared.interfaces.EventDispatcherInterface;
 import br.net.digix.desafio.silva.daniel.infraestrutura.service.FamilyService;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
@@ -38,7 +42,15 @@ class FamilyControllerTest {
 
     @BeforeEach
     void setUp() {
-        List<FamilyEntity> families = List.of(new FamilyEntity("12345678900", new BigDecimal("800"), "Test", Collections.emptyList()));
+        Dependent dependentConjuge = new Dependent(
+                "Teste",
+                LocalDate.of(1993, 2, 5),
+                false,
+                DependentTypeEnum.CONJUGE,
+                DependentGenderEnum.FEMININO
+        );
+
+        List<FamilyEntity> families = List.of(new FamilyEntity("12345678900", new BigDecimal("800"), "Test", List.of(dependentConjuge)));
         when(service.findAll()).thenReturn(families);
     }
 
@@ -47,7 +59,7 @@ class FamilyControllerTest {
         this.mockMvc.perform(
                 post("/api/v1/family")
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON).content("{\"name\":\"Test\",\"cpf\":\"12345678900\",\"income\":800,\"dependents\":[]}"))
+                .accept(MediaType.APPLICATION_JSON).content("{\"name\":\"Test\",\"cpf\":\"12345678900\",\"income\":800,\"dependents\":[{\"name\": \"dependente 2\", \"birthDate\": \"1993-02-05\", \"type\": \"CONJUGE\", \"gender\": \"FEMININO\", \"work\": false}]}"))
                 .andExpect(status().isCreated());
     }
 
@@ -57,7 +69,7 @@ class FamilyControllerTest {
         this.mockMvc.perform(
                         post("/api/v1/family")
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .accept(MediaType.APPLICATION_JSON).content("{\"name\":\"Test\",\"cpf\":\"12345678900\",\"income\":800,\"dependents\":[]}"))
+                                .accept(MediaType.APPLICATION_JSON).content("{\"name\":\"Test\",\"cpf\":\"12345678900\",\"income\":800,\"dependents\":[{\"name\": \"dependente 2\", \"birthDate\": \"1993-02-05\", \"type\": \"CONJUGE\", \"gender\": \"FEMININO\", \"work\": false}]}"))
                 .andExpect(status().isCreated());
 
         this.mockMvc.perform(
@@ -66,6 +78,6 @@ class FamilyControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().json("[{\"name\":\"Test\",\"cpf\":\"12345678900\",\"income\":800,\"dependents\":[],\"points\":0}]"));
+                .andExpect(content().json("[{\"name\":\"Test\",\"cpf\":\"12345678900\",\"income\":800,\"dependents\":[{\"name\":\"Teste\",\"birthDate\":\"1993-02-05\",\"type\":\"CONJUGE\",\"gender\":\"FEMININO\",\"work\":false}],\"points\":0}]"));
     }
 }

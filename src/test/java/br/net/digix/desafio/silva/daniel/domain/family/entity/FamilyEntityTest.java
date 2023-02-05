@@ -24,16 +24,25 @@ class FamilyEntityTest {
                 DependentTypeEnum.FILHO,
                 DependentGenderEnum.MASCULINO
         );
+
+        Dependent dependentConjuge = new Dependent(
+                "Teste",
+                LocalDate.now().minusYears(30),
+                false,
+                DependentTypeEnum.CONJUGE,
+                DependentGenderEnum.FEMININO
+        );
+
         FamilyEntity family = new FamilyEntity(
                 "12345678999",
                 new BigDecimal(800),
                 "Daniel",
-                List.of(dependent)
+                List.of(dependent, dependentConjuge)
         );
 
         assertEquals(family.getName(), "Daniel");
         assertEquals(family.getIncome(), new BigDecimal(800));
-        assertEquals(family.getDependents().size(), 1);
+        assertEquals(family.getDependents().size(), 2);
         assertEquals(family.getDependents().get(0).getName(), "Teste");
         assertEquals(family.getDependents().get(0).getBirthDate(), LocalDate.of(2021, 11, 11));
         assertFalse(family.getDependents().get(0).isWork());

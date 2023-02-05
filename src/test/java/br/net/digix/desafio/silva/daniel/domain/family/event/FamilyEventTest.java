@@ -96,11 +96,20 @@ class FamilyEventTest {
                 DependentTypeEnum.FILHO,
                 DependentGenderEnum.MASCULINO
         );
+
+        Dependent dependentConjuge = new Dependent(
+                "Teste",
+                LocalDate.now().minusYears(30),
+                false,
+                DependentTypeEnum.CONJUGE,
+                DependentGenderEnum.FEMININO
+        );
+
         FamilyEntity family = new FamilyEntity(
                 "12345678900",
                 new BigDecimal(800),
                 "Daniel",
-                List.of(dependent)
+                List.of(dependent, dependentConjuge)
         );
 
         EventHandlerInterface<EventInterface> eventHandler = new CalculatePointsFamilyHandler(
@@ -119,11 +128,19 @@ class FamilyEventTest {
     @Test
     void shouldCalculateDontDependentEvent() {
 
+        Dependent dependentConjuge = new Dependent(
+                "Teste",
+                LocalDate.now().minusYears(30),
+                false,
+                DependentTypeEnum.CONJUGE,
+                DependentGenderEnum.FEMININO
+        );
+
         FamilyEntity family = new FamilyEntity(
                 "12345678900",
                 new BigDecimal(800),
                 "Daniel",
-                Collections.emptyList()
+                List.of(dependentConjuge)
         );
 
         EventHandlerInterface<EventInterface> eventHandler = new CalculatePointsFamilyHandler(
@@ -150,11 +167,19 @@ class FamilyEventTest {
                 DependentGenderEnum.MASCULINO
         );
 
+        Dependent dependentConjuge = new Dependent(
+                "Teste",
+                LocalDate.now().minusYears(30),
+                false,
+                DependentTypeEnum.CONJUGE,
+                DependentGenderEnum.FEMININO
+        );
+
         FamilyEntity family = new FamilyEntity(
                 "12345678900",
                 new BigDecimal(3000),
                 "Daniel",
-                List.of(dependent)
+                List.of(dependent, dependentConjuge)
         );
 
         EventHandlerInterface<EventInterface> eventHandler = new CalculatePointsFamilyHandler(
@@ -189,6 +214,14 @@ class FamilyEventTest {
                 DependentGenderEnum.MASCULINO
         );
 
+        Dependent dependentConjuge = new Dependent(
+                "Teste",
+                LocalDate.now().minusYears(30),
+                false,
+                DependentTypeEnum.CONJUGE,
+                DependentGenderEnum.FEMININO
+        );
+
         Dependent dependent3 = new Dependent(
                 "Teste",
                 LocalDate.now().minusYears(6),
@@ -201,7 +234,7 @@ class FamilyEventTest {
                 "12345678900",
                 new BigDecimal(3000),
                 "Daniel",
-                List.of(dependent, dependent2, dependent3)
+                List.of(dependent, dependent2, dependent3, dependentConjuge)
         );
 
         EventHandlerInterface<EventInterface> eventHandler = new CalculatePointsFamilyHandler(
@@ -244,11 +277,19 @@ class FamilyEventTest {
                 DependentGenderEnum.MASCULINO
         );
 
+        Dependent dependentConjuge = new Dependent(
+                "Teste",
+                LocalDate.now().minusYears(30),
+                false,
+                DependentTypeEnum.CONJUGE,
+                DependentGenderEnum.FEMININO
+        );
+
         FamilyEntity family = new FamilyEntity(
                 "12345678900",
                 new BigDecimal(1000),
                 "Daniel",
-                List.of(dependent, dependent2, dependent3)
+                List.of(dependent, dependent2, dependent3, dependentConjuge)
         );
 
         EventHandlerInterface<EventInterface> eventHandler = new CalculatePointsFamilyHandler(
@@ -267,11 +308,19 @@ class FamilyEventTest {
     @Test
     void shouldCalculateIncomeBetween901And1500Event() {
 
+        Dependent dependentConjuge = new Dependent(
+                "Teste",
+                LocalDate.now().minusYears(30),
+                false,
+                DependentTypeEnum.CONJUGE,
+                DependentGenderEnum.FEMININO
+        );
+
         FamilyEntity family = new FamilyEntity(
                 "12345678900",
                 new BigDecimal(1000),
                 "Daniel",
-                Collections.emptyList()
+                List.of(dependentConjuge)
         );
 
         EventHandlerInterface<EventInterface> eventHandler = new CalculatePointsFamilyHandler(

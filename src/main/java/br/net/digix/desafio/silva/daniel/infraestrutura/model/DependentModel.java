@@ -1,5 +1,7 @@
 package br.net.digix.desafio.silva.daniel.infraestrutura.model;
 
+import br.net.digix.desafio.silva.daniel.domain.family.entity.FamilyEntity;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -10,7 +12,7 @@ public class DependentModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -27,11 +29,11 @@ public class DependentModel {
     @Column(name = "gender")
     private String gender;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
