@@ -4,5 +4,14 @@ public enum DependentTypeEnum {
     FILHO,
     CONJUGE,
     PAI,
-    MAE
+    MAE;
+
+    public static DependentTypeEnum ofType(final String type) {
+        for (DependentTypeEnum genderEnum : DependentTypeEnum.values()) {
+            if (genderEnum.toString().equals(type)) {
+                return genderEnum;
+            }
+        }
+        return null;
+    }
 }
