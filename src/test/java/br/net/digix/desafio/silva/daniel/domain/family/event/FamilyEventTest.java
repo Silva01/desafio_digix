@@ -97,6 +97,7 @@ class FamilyEventTest {
                 DependentGenderEnum.MASCULINO
         );
         FamilyEntity family = new FamilyEntity(
+                "12345678900",
                 new BigDecimal(800),
                 "Daniel",
                 List.of(dependent)
@@ -119,6 +120,7 @@ class FamilyEventTest {
     void shouldCalculateDontDependentEvent() {
 
         FamilyEntity family = new FamilyEntity(
+                "12345678900",
                 new BigDecimal(800),
                 "Daniel",
                 Collections.emptyList()
@@ -149,6 +151,7 @@ class FamilyEventTest {
         );
 
         FamilyEntity family = new FamilyEntity(
+                "12345678900",
                 new BigDecimal(3000),
                 "Daniel",
                 List.of(dependent)
@@ -195,6 +198,7 @@ class FamilyEventTest {
         );
 
         FamilyEntity family = new FamilyEntity(
+                "12345678900",
                 new BigDecimal(3000),
                 "Daniel",
                 List.of(dependent, dependent2, dependent3)
@@ -241,6 +245,7 @@ class FamilyEventTest {
         );
 
         FamilyEntity family = new FamilyEntity(
+                "12345678900",
                 new BigDecimal(1000),
                 "Daniel",
                 List.of(dependent, dependent2, dependent3)
@@ -263,6 +268,7 @@ class FamilyEventTest {
     void shouldCalculateIncomeBetween901And1500Event() {
 
         FamilyEntity family = new FamilyEntity(
+                "12345678900",
                 new BigDecimal(1000),
                 "Daniel",
                 Collections.emptyList()

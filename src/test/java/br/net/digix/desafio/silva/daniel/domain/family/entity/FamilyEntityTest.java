@@ -25,6 +25,7 @@ class FamilyEntityTest {
                 DependentGenderEnum.MASCULINO
         );
         FamilyEntity family = new FamilyEntity(
+                "12345678999",
                 new BigDecimal(800),
                 "Daniel",
                 List.of(dependent)
@@ -38,6 +39,7 @@ class FamilyEntityTest {
         assertFalse(family.getDependents().get(0).isWork());
         assertEquals(family.getDependents().get(0).getType(), DependentTypeEnum.FILHO);
         assertEquals(family.getDependents().get(0).getGender(), DependentGenderEnum.MASCULINO);
+        assertEquals(family.getCpf(), "12345678999");
 
         assertEquals(family.getPoints(), 0);
 
