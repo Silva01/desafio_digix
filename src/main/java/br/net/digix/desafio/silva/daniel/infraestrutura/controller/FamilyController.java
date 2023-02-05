@@ -52,6 +52,8 @@ public class FamilyController {
                 .findAll()
                 .stream()
                 .map(FamilyEntity::toDTO)
+                .collect(Collectors.toList()).stream()
+                .sorted((f1, f2) -> f2.getPoints().compareTo(f1.getPoints()))
                 .collect(Collectors.toList());
     }
 }

@@ -14,13 +14,14 @@ public class FamilyEntity {
     private String name;
     private BigDecimal income;
     private List<Dependent> dependents;
-    private int points;
+    private Integer points;
 
     public FamilyEntity(String cpf, BigDecimal income, String name, List<Dependent> dependents) {
         this.income = income;
         this.name = name;
         this.dependents = dependents;
         this.cpf = cpf;
+        this.points = 0;
         this.validate();
     }
 
@@ -40,10 +41,10 @@ public class FamilyEntity {
         return cpf;
     }
 
-    public void addPoints(int points) {
+    public void addPoints(Integer points) {
         this.points += points;
     }
-    public int getPoints() {
+    public Integer getPoints() {
         return points;
     }
 
@@ -52,7 +53,7 @@ public class FamilyEntity {
         dto.setName(this.name);
         dto.setIncome(this.income);
         dto.setDependents(this.dependents);
-        dto.setPoints(this.points);
+        dto.setPoints(this.points.longValue());
         dto.setCpf(this.cpf);
         return dto;
     }
