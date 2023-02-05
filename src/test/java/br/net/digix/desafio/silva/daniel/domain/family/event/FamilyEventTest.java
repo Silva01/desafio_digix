@@ -27,15 +27,15 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Tag("unit")
-class CalculateDependentEventTest {
+class FamilyEventTest {
 
     private EventDispatcher eventDispatcher = new EventDispatcher();
-    private CalculateDependentFamilyService calculateDependentFamilyService = new CalculateDependentFamilyService();
-    private CalculateIncomeFamilyService calculateIncomeFamilyService = new CalculateIncomeFamilyService();
+    private final CalculateDependentFamilyService calculateDependentFamilyService = new CalculateDependentFamilyService();
+    private final CalculateIncomeFamilyService calculateIncomeFamilyService = new CalculateIncomeFamilyService();
 
     private final List<Calculate<List<Criteria>, FamilyEntity>> calculateList = List.of(calculateIncomeFamilyService, calculateDependentFamilyService);
 
-    private CriteriaRepository criteriaRepository = mock(CriteriaRepository.class);
+    private final CriteriaRepository criteriaRepository = mock(CriteriaRepository.class);
 
     @BeforeEach
     void contextLoad() {
@@ -107,7 +107,7 @@ class CalculateDependentEventTest {
                 calculateList
         );
 
-        EventInterface event = new CalculateDependentEvent(family);
+        EventInterface event = new FamilyEvent(family);
 
         eventDispatcher.register(eventHandler, eventHandler.getClass().getName());
         eventDispatcher.notify(event, eventHandler.getClass().getName());
@@ -129,7 +129,7 @@ class CalculateDependentEventTest {
                 calculateList
         );
 
-        EventInterface event = new CalculateDependentEvent(family);
+        EventInterface event = new FamilyEvent(family);
 
         eventDispatcher.register(eventHandler, eventHandler.getClass().getName());
         eventDispatcher.notify(event, eventHandler.getClass().getName());
@@ -159,7 +159,7 @@ class CalculateDependentEventTest {
                 calculateList
         );
 
-        EventInterface event = new CalculateDependentEvent(family);
+        EventInterface event = new FamilyEvent(family);
 
         eventDispatcher.register(eventHandler, eventHandler.getClass().getName());
         eventDispatcher.notify(event, eventHandler.getClass().getName());
@@ -205,7 +205,7 @@ class CalculateDependentEventTest {
                 calculateList
         );
 
-        EventInterface event = new CalculateDependentEvent(family);
+        EventInterface event = new FamilyEvent(family);
 
         eventDispatcher.register(eventHandler, eventHandler.getClass().getName());
         eventDispatcher.notify(event, eventHandler.getClass().getName());
@@ -251,7 +251,7 @@ class CalculateDependentEventTest {
                 calculateList
         );
 
-        EventInterface event = new CalculateDependentEvent(family);
+        EventInterface event = new FamilyEvent(family);
 
         eventDispatcher.register(eventHandler, eventHandler.getClass().getName());
         eventDispatcher.notify(event, eventHandler.getClass().getName());
@@ -273,7 +273,7 @@ class CalculateDependentEventTest {
                 calculateList
         );
 
-        EventInterface event = new CalculateDependentEvent(family);
+        EventInterface event = new FamilyEvent(family);
 
         eventDispatcher.register(eventHandler, eventHandler.getClass().getName());
         eventDispatcher.notify(event, eventHandler.getClass().getName());
