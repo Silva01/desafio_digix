@@ -1,6 +1,7 @@
-package br.net.digix.desafio.silva.daniel.domain.family.exception.handler;
+package br.net.digix.desafio.silva.daniel.infraestrutura.exception.handler;
 
 
+import br.net.digix.desafio.silva.daniel.domain.family.exception.FamilyConjugeNotValidException;
 import br.net.digix.desafio.silva.daniel.infraestrutura.dto.ErrorResponseDTO;
 import br.net.digix.desafio.silva.daniel.domain.family.exception.CpfJaCadastradoException;
 import org.springframework.http.HttpStatus;
@@ -13,7 +14,13 @@ public class GlobalHandler {
 
     @ExceptionHandler(value = {CpfJaCadastradoException.class})
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public ErrorResponseDTO cpfNaoCadastradoHandler(CpfJaCadastradoException ex) {
+    public ErrorResponseDTO cpfNaoCadastradoHandler() {
         return new ErrorResponseDTO("Familia Já Cadastrada");
+    }
+
+    @ExceptionHandler(value = {FamilyConjugeNotValidException.class})
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ErrorResponseDTO conjugeFamilyHandler(FamilyConjugeNotValidException ex) {
+        return new ErrorResponseDTO(ex.getMessage());
     }
 }
