@@ -1,6 +1,7 @@
 package br.net.digix.desafio.silva.daniel.domain.family.entity;
 
 import br.net.digix.desafio.silva.daniel.domain.family.value_object.Dependent;
+import br.net.digix.desafio.silva.daniel.domain.family.value_object.FamilyDTO;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -40,5 +41,14 @@ public class FamilyEntity {
     }
     public int getPoints() {
         return points;
+    }
+
+    public FamilyDTO toDTO() {
+        FamilyDTO dto = new FamilyDTO();
+        dto.setName(this.name);
+        dto.setIncome(this.income);
+        dto.setDependents(this.dependents);
+        dto.setPoints(this.points);
+        return dto;
     }
 }
