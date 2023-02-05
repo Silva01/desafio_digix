@@ -7,7 +7,6 @@ import br.net.digix.desafio.silva.daniel.domain.shared.interfaces.EventInterface
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 public class EventDispatcher implements EventDispatcherInterface {
 
