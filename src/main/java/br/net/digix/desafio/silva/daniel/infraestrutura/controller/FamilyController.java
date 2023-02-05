@@ -1,10 +1,13 @@
 package br.net.digix.desafio.silva.daniel.infraestrutura.controller;
 
+import br.net.digix.desafio.silva.daniel.domain.family.entity.FamilyEntity;
 import br.net.digix.desafio.silva.daniel.domain.family.factory.FamilyEventFactory;
 import br.net.digix.desafio.silva.daniel.domain.family.factory.FamilyFactory;
+import br.net.digix.desafio.silva.daniel.domain.family.repository.FamilyRepository;
 import br.net.digix.desafio.silva.daniel.domain.family.value_object.FamilyDTO;
 import br.net.digix.desafio.silva.daniel.domain.shared.interfaces.EventDispatcherInterface;
 import br.net.digix.desafio.silva.daniel.domain.shared.interfaces.EventInterface;
+import br.net.digix.desafio.silva.daniel.infraestrutura.service.FamilyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,8 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/family")
@@ -25,8 +28,15 @@ public class FamilyController {
     @Value("${family.constants.create-family}")
     private String createFamilyIdentify;
 
-    @Qualifier("familyEventDispatcher")
-    private EventDispatcherInterface eventDispatcher;
+    private final EventDispatcherInterface eventDispatcher;
+
+    private final FamilyRepository familyRepository;
+
+    @Autowired
+    public FamilyController(@Qualifier("familyEventDispatcher") EventDispatcherInterface eventDispatcher, FamilyService familyRepository) {
+        this.eventDispatcher = eventDispatcher;
+        this.familyRepository = familyRepository;
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -37,6 +47,10 @@ public class FamilyController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<FamilyDTO> findAll() {
-        return Collections.emptyList();
+        return familyRepository
+                .findAll()
+                .stream()
+                .map(FamilyEntity::toDTO)
+                .collect(Collectors.toList());
     }
 }
