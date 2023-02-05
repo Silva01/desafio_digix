@@ -52,4 +52,10 @@ public class FamilyEntity {
         dto.setCpf(this.cpf);
         return dto;
     }
+
+    public void validate() {
+        if (this.cpf == null) {
+            throw new IllegalArgumentException("CPF is required");
+        }
+    }
 }

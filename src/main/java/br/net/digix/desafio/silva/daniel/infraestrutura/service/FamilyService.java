@@ -2,7 +2,7 @@ package br.net.digix.desafio.silva.daniel.infraestrutura.service;
 
 import br.net.digix.desafio.silva.daniel.domain.family.entity.FamilyEntity;
 import br.net.digix.desafio.silva.daniel.domain.family.repository.FamilyRepository;
-import br.net.digix.desafio.silva.daniel.infraestrutura.exception.CpfJaCadastradoException;
+import br.net.digix.desafio.silva.daniel.domain.family.exception.CpfJaCadastradoException;
 import br.net.digix.desafio.silva.daniel.infraestrutura.mapper.DependentToModelMapper;
 import br.net.digix.desafio.silva.daniel.infraestrutura.mapper.FamilyResponseApiMapper;
 import br.net.digix.desafio.silva.daniel.infraestrutura.model.FamilyModel;
