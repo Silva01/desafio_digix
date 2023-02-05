@@ -8,6 +8,8 @@ public class FamilyDTO {
     private BigDecimal income;
     private List<Dependent> dependents;
 
+    private long points;
+
     public String getName() {
         return name;
     }
@@ -30,5 +32,13 @@ public class FamilyDTO {
 
     public void setDependents(List<Dependent> dependents) {
         this.dependents = dependents;
+    }
+
+    public long getPoints() {
+        return points;
+    }
+
+    public void setPoints(long points) {
+        this.points = points;
     }
 }
