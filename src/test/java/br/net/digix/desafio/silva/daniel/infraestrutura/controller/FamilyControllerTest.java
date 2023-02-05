@@ -47,7 +47,7 @@ class FamilyControllerTest {
         this.mockMvc.perform(
                 post("/api/v1/family")
                 .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON).content("{\"name\":\"Test\",\"income\":800,\"dependents\":[]}"))
+                .accept(MediaType.APPLICATION_JSON).content("{\"name\":\"Test\",\"cpf\":\"12345678900\",\"income\":800,\"dependents\":[]}"))
                 .andExpect(status().isCreated());
     }
 
@@ -57,7 +57,7 @@ class FamilyControllerTest {
         this.mockMvc.perform(
                         post("/api/v1/family")
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .accept(MediaType.APPLICATION_JSON).content("{\"name\":\"Test\",\"income\":800,\"dependents\":[]}"))
+                                .accept(MediaType.APPLICATION_JSON).content("{\"name\":\"Test\",\"cpf\":\"12345678900\",\"income\":800,\"dependents\":[]}"))
                 .andExpect(status().isCreated());
 
         this.mockMvc.perform(
@@ -66,6 +66,6 @@ class FamilyControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().json("[{\"name\":\"Test\",\"income\":800,\"dependents\":[]}]"));
+                .andExpect(content().json("[{\"name\":\"Test\",\"cpf\":\"12345678900\",\"income\":800,\"dependents\":[],\"points\":0}]"));
     }
 }
