@@ -9,7 +9,7 @@ VALUES ('INCOME', 901, 1500, true, 'Renda de familia de 901 ate 1500 reais', 3, 
 
 -- Criterio de Dependentes
 INSERT INTO CRITERIA (TYPE, INITIAL_CRITERIA, FINAL_CRITERIA, IS_ACTIVED, DESCRIPTION, POINTS, MINIMUM_REPEAT_CRITERIA, MAXIMUM_REPEAT_CRITERIA)
-VALUES ('INCOME', null, 17, true, '3 ou mais Dependentes menores de 18 anos', 3, 3, null);
+VALUES ('DEPENDENT_AGE', null, 17, true, '3 ou mais Dependentes menores de 18 anos', 3, 3, null);
 
 INSERT INTO CRITERIA (TYPE, INITIAL_CRITERIA, FINAL_CRITERIA, IS_ACTIVED, DESCRIPTION, POINTS, MINIMUM_REPEAT_CRITERIA, MAXIMUM_REPEAT_CRITERIA)
-VALUES ('INCOME', null, 17, true, '1 ou 2 Dependentes menores de 18 anos', 2, 1, 2);
+VALUES ('DEPENDENT_AGE', null, 17, true, '1 ou 2 Dependentes menores de 18 anos', 2, 1, 2);
