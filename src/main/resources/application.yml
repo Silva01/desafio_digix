@@ -1,3 +1,20 @@
 family.constants:
   calculate-points: calculate-points
   create-family: create-family
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:family_digix
+    username: sa
+    password: sa
+    driverClassName: org.h2.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
+      generate-ddl: true
+      sql:
+        init:
+          mode: always
+    defer-datasource-initialization: true
