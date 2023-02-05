@@ -43,6 +43,7 @@ public class FamilyController {
     public void createFamily(@RequestBody FamilyDTO familyDTO) {
         EventInterface event = FamilyEventFactory.createEventFamily(FamilyFactory.createFamilyEntity(familyDTO));
         eventDispatcher.notify(event, calculatePointsIdentify);
+        eventDispatcher.notify(event, createFamilyIdentify);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
