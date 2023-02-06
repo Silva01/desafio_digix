@@ -68,7 +68,7 @@ Projeto foi desenvolvido usando banco de dados relacional h2 em memória
 
 ### Seguintes Database foram criadas
 
-![](/Users/silva01/workspace/desafio-digix/diagram_dados.jpg)
+![](diagram_dados.jpg)
 
 Onde existe um relacionamento entre Familia e Dependente onde 1 Familia tem muitos Dependentes
 
